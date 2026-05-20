@@ -109,142 +109,98 @@ mysqli_query(
     </div>
     <div class="modal" id="inquiryModal">
         <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">
-            ×
-        </span>
-        <h2>
-            Inquiry Details
-        </h2>
-        <div id="modalBody"></div>
+            <span class="close-btn" onclick="closeModal()">
+                ×
+            </span>
+            <h2>
+                Inquiry Details
+            </h2>
+            <div id="modalBody"></div>
+        </div>
     </div>
 </div>
-</div>
-
-
-
-
 <script>
+    const searchInput = document.getElementById("searchInput");
 
-const searchInput =
-document.getElementById(
-    "searchInput"
-);
+    searchInput.addEventListener("keyup", function () {
 
-searchInput
-.addEventListener(
-"keyup",
-function(){
+        let filter = this.value.toLowerCase();
 
-    let filter =
-    this.value
-    .toLowerCase();
+        let rows = document.querySelectorAll("#inquiryTable tr");
 
-    let rows =
-    document.querySelectorAll(
-    "#inquiryTable tr"
-    );
+        rows.forEach(row => {
 
-    rows.forEach(row=>{
+            let text = row.innerText.toLowerCase();
 
-        let text =
-        row.innerText
-        .toLowerCase();
+            row.style.display = text.includes(filter)
+                ? ""
+                : "none";
 
-        row.style.display =
-        text.includes(filter)
-        ? ""
-        : "none";
+        });
 
     });
 
-});
+    function openModal(
+        name,
+        email,
+        phone,
+        message,
+        date
+    ) {
 
-function openModal(
-name,
-email,
-phone,
-message,
-date
-){
+        document.getElementById("modalBody").innerHTML = `
+            <div class="detail-item">
+                <strong>Name</strong>
+                ${name}
+            </div>
 
-document.getElementById(
-"modalBody"
-).innerHTML=
-`
-<div class="detail-item">
-<strong>Name</strong>
-${name}
-</div>
+            <div class="detail-item">
+                <strong>Email</strong>
+                ${email}
+            </div>
 
-<div class="detail-item">
-<strong>Email</strong>
-${email}
-</div>
+            <div class="detail-item">
+                <strong>Phone</strong>
+                ${phone}
+            </div>
 
-<div class="detail-item">
-<strong>Phone</strong>
-${phone}
-</div>
+            <div class="detail-item">
+                <strong>Message</strong>
+                ${message}
+            </div>
 
-<div class="detail-item">
-<strong>Message</strong>
-${message}
-</div>
+            <div class="detail-item">
+                <strong>Date</strong>
+                ${date}
+            </div>
+        `;
 
-<div class="detail-item">
-<strong>Date</strong>
-${date}
-</div>
-`;
+        document.getElementById("inquiryModal").style.display = "flex";
+    }
 
-document.getElementById(
-"inquiryModal"
-).style.display=
-"flex";
+    function closeModal() {
+        document.getElementById("inquiryModal").style.display = "none";
+    }
 
-}
+    function deleteInquiry(id) {
 
-function closeModal(){
+        if (!confirm("Delete inquiry?")) {
+            return;
+        }
 
-document.getElementById(
-"inquiryModal"
-).style.display=
-"none";
+        fetch("ajax/delete-inquiry.php?id=" + id)
+            .then(res => res.json())
+            .then(data => {
 
-}
+                if (data.status === "success") {
+                    location.reload();
+                } else {
+                    alert(data.message);
+                }
 
-function deleteInquiry(id){
+            });
 
-if(
-!confirm(
-"Delete inquiry?"
-)
-){
-return;
-}
-
-fetch(
-"ajax/delete-inquiry.php?id="
-+id
-)
-.then(res=>res.json())
-.then(data=>{
-
-if(
-data.status
-==="success"
-){
-location.reload();
-}else{
-alert(
-data.message
-);
-}
-
-});
-
-}
-
+    }
 </script>
 
 <?php include('include/footer.php'); ?>

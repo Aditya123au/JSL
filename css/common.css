@@ -17,7 +17,7 @@ body{
 }
 .sidebar{
     width:280px;
-    height:100vh;
+    height:100%;
     background:#111827;
     position:fixed;
     top:0;
@@ -237,7 +237,7 @@ body{
 
     .page-container{
         width: 100%;
-        max-width:1200px;
+        max-width:1150px;
         margin:auto;
         padding:40px 20px;
     }
@@ -471,9 +471,31 @@ body{
     .error-box.active{
         display:block;
     }
-
+    @media(max-width:1320px){
+        .page-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+    }
     @media(max-width:1200px){
-
+        .page-container {
+            width: 100%;
+            max-width: 867px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+    }
+    @media(max-width:1024px){
+        .page-container {
+            width: 100%;
+            max-width: 767px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+    }
+    @media(max-width:1200px){
         .stats-grid{
             grid-template-columns:repeat(2,1fr);
         }
@@ -600,4 +622,26 @@ body{
     border-radius: 10px;
     cursor: pointer;
 }
+footer {
+    margin-top: 20px;
+    padding-block: 30px;
+    text-align: center;
+    background: blue;
+    color: #ffffff;
+}
+footer a{
+    color: #ffffff;
+    cursor: pointer;
+}
+@media(max-width:1200px){
+    
+    footer {
+        margin-top: -14px;
+        padding-block: 30px;
+        text-align: center;
+        background: blue;
+        color: #ffffff;
+    }
+}
+
 /* Page Container for the news and product customer table commen css End */
