@@ -1,0 +1,33 @@
+
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.user-logo{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:#4f46e5;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    font-weight:700;
+    text-transform:uppercase;
+    flex-shrink:0;
+}
+
+.status{
+    padding:8px 14px;
+    border-radius:50px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.active-status{
+    background:#d1fae5;
+    color:#065f46;
+}
